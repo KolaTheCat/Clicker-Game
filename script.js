@@ -15,13 +15,21 @@ btn.addEventListener("click", () => {
 
 setInterval(() => {
   moneyValue *= multValue;
-  money.innerText = moneyValue;
+  money.innerText = moneyValue.toFixed(0);
+  mult.innerText = multValue;
+  touch.innerText = touchValue;
 }, 1000);
 
-function AddMulti(value) {
-  multValue += value;
+function AddMulti(value, buy) {
+  if (moneyValue >= buy) {
+    multValue += value;
+    moneyValue -= buy;
+  }
 }
 
-function AddTouch(value) {
-  touchValue += value;
+function AddTouch(value, buy) {
+  if (moneyValue >= buy) {
+    touchValue += value;
+    moneyValue -= buy;
+  }
 }
