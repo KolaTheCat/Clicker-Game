@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Game</title>
+  </head>
+  <body>
+    <div class="static" id="infos">
+      <div class="money">
+        <h1>Money</h1>
+        <h3 id="money">0.00</h3>
+      </div>
+      <div class="others">
+        <div class="multi">
+          <p>Multiplicator</p>
+          <p id="multi">1.0</p>
+        </div>
+        <div class="touch">
+          <p>Touch</p>
+          <p id="touch">1.0</p>
+        </div>
+      </div>
+    </div>
+    <button id="btn">+</button>
+    <div class="shop">
+      <ul>
+        <li><button onclick="AddMulti(10)"></button></li>
+        <li><button onclick="AddTouch(10)"></button></li>
+      </ul>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
