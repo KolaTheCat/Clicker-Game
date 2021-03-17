@@ -5,8 +5,10 @@ let btn = document.getElementById("btn");
 let item = document.getElementById("item");
 
 var touchValue = 1;
-var multValue = 1;
+var multValue = 0;
 var moneyValue = 0;
+
+const additive = 0.25;
 
 btn.addEventListener("click", () => {
   moneyValue += touchValue;
@@ -14,16 +16,26 @@ btn.addEventListener("click", () => {
 });
 
 setInterval(() => {
-  moneyValue *= multValue;
+  moneyValue += multValue;
   money.innerText = moneyValue.toFixed(2);
   mult.innerText = multValue;
   touch.innerText = touchValue;
 }, 1000);
 
-function AddMulti(value, buy) {
+function AddMulti(value, buy, id) {
   if (moneyValue >= buy) {
     multValue += value;
     moneyValue -= buy;
+    // console.log([document.getElementById(id), id]);
+    document
+      .getElementById(id)
+      .setAttribute("onclick", `AddMulti(${value}, ${buy / additive}, ${id})`);
+    document.getElementById(`cost_helper_${id}`).innerText = `Costs: ${(
+      buy / additive
+    ).toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD",
+    })}`;
   }
 }
 

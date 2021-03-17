@@ -60,13 +60,16 @@ let touchItems = [
   },
 ];
 
-multItems.forEach(({ name, value, buy }) => {
+multItems.forEach(({ name, value, buy }, item) => {
   var li = document.createElement("li");
 
   li.innerHTML = `
-        <button onclick="AddMulti(${value}, ${buy})">
+        <button id="${item}" onclick="AddMulti(${value}, ${buy}, ${item})">
             <p>${name}</p>
-            <p>Costs: ${buy}</p>
+            <p id="cost_helper_${item}">Costs: ${buy.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  })}</p>
         </button>
     `;
 
