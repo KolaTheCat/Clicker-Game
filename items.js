@@ -8,7 +8,7 @@ let multItems = [
 ];
 let touchItems = [
   {
-    name: "Touch +10",
+    name: "Touch +2",
     value: 10,
     buy: 10,
   },

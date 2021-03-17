@@ -10,12 +10,12 @@ var moneyValue = 0;
 
 btn.addEventListener("click", () => {
   moneyValue += touchValue;
-  money.innerText = moneyValue;
+  money.innerText = moneyValue.toFixed(2);
 });
 
 setInterval(() => {
   moneyValue *= multValue;
-  money.innerText = moneyValue.toFixed(0);
+  money.innerText = moneyValue.toFixed(2);
   mult.innerText = multValue;
   touch.innerText = touchValue;
 }, 1000);
