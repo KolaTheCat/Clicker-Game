@@ -22,6 +22,30 @@ setInterval(() => {
   touch.innerText = touchValue;
 }, 1000);
 
+setInterval(() => {
+  for (let i = 0; i <= 9; i++) {
+    let cost_helper = document
+      .getElementById(`cost_helper_${i}`)
+      .innerText.split(/\D/g)
+      .join("");
+    let cost_upgrade = document
+      .getElementById(`cost_upgrade_${i}`)
+      .innerText.split(/\D/g)
+      .join("");
+    let moneyRegex = money.innerText.split(/\D/g).join("");
+    if (moneyRegex < cost_helper) {
+      document.getElementById(`helper_${i}`).setAttribute("disabled", true);
+    } else if (moneyRegex >= cost_helper) {
+      document.getElementById(`helper_${i}`).removeAttribute("disabled");
+    }
+    if (moneyRegex < cost_upgrade) {
+      document.getElementById(`upgrade_${i}`).setAttribute("disabled", true);
+    } else if (moneyRegex >= cost_upgrade) {
+      document.getElementById(`upgrade_${i}`).removeAttribute("disabled");
+    }
+  }
+}, 1000);
+
 function FormatValue(string) {
   return string.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
