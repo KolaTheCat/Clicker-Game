@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.money {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.money h3 {
+  font-size: 25px;
+}
+
+.touch {
+  display: none;
+}
+
+.multi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multi #multi {
+  margin-left: 10px;
+}
+
+#btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+
+  padding: 25px;
+  font-size: 25px;
+}
+
+#helpers {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  margin: 10px 50px;
+}
+
+#upgrades {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  margin: 10px 50px;
+}
