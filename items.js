@@ -2,53 +2,53 @@ let helpers = document.getElementById("helpers");
 let upgrades = document.getElementById("upgrades");
 let multItems = [
   {
-    name: "Multiplier +0.25",
-    value: 0.25,
+    name: "Multiplier 1",
+    value: 0.01,
     buy: 10,
   },
   {
-    name: "Multiplier +5",
-    value: 5,
+    name: "Multiplier 2",
+    value: 0.02,
     buy: 50,
   },
   {
-    name: "Multiplier +25",
-    value: 25,
+    name: "Multiplier 3",
+    value: 0.05,
     buy: 250,
   },
   {
-    name: "Multiplier +125",
-    value: 125,
+    name: "Multiplier 4",
+    value: 0.01,
     buy: 1250,
   },
   {
-    name: "Multiplier +625",
-    value: 625,
+    name: "Multiplier 5",
+    value: 0.02,
     buy: 6250,
   },
   {
-    name: "Multiplier +3125",
-    value: 3125,
+    name: "Multiplier 6",
+    value: 0.05,
     buy: 31250,
   },
   {
-    name: "Multiplier +15625",
-    value: 15625,
+    name: "Multiplier 7",
+    value: 0.075,
     buy: 156250,
   },
   {
-    name: "Multiplier +78125",
-    value: 78125,
+    name: "Multiplier 8",
+    value: 0.0125,
     buy: 781250,
   },
   {
-    name: "Multiplier +390625",
-    value: 390625,
+    name: "Multiplier 9",
+    value: 0.015,
     buy: 3906250,
   },
   {
-    name: "Multiplier +1953125",
-    value: 1953125,
+    name: "Multiplier 10",
+    value: 0.0175,
     buy: 19531250,
   },
 ];
