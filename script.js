@@ -12,36 +12,42 @@ const additive = 0.25;
 
 btn.addEventListener("click", () => {
   moneyValue += touchValue;
-  money.innerText = moneyValue.toFixed(2);
+  money.innerText = FormatValue(moneyValue);
 });
 
 setInterval(() => {
   moneyValue += multValue;
-  money.innerText = moneyValue.toFixed(2);
-  mult.innerText = multValue;
+  money.innerText = FormatValue(moneyValue);
+  mult.innerText = multValue.toFixed(2);
   touch.innerText = touchValue;
 }, 1000);
+
+function FormatValue(string) {
+  return string.toLocaleString("en-US", { style: "currency", currency: "USD" });
+}
 
 function AddMulti(value, buy, id) {
   if (moneyValue >= buy) {
     multValue += value;
     moneyValue -= buy;
-    // console.log([document.getElementById(id), id]);
     document
-      .getElementById(id)
+      .getElementById(`helper_${id}`)
       .setAttribute("onclick", `AddMulti(${value}, ${buy / additive}, ${id})`);
-    document.getElementById(`cost_helper_${id}`).innerText = `Costs: ${(
-      buy / additive
-    ).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    })}`;
+    document.getElementById(
+      `cost_helper_${id}`
+    ).innerText = `Costs: ${FormatValue(buy / additive)}`;
   }
 }
 
-function AddTouch(value, buy) {
+function AddTouch(value, buy, id) {
   if (moneyValue >= buy) {
     touchValue += value;
     moneyValue -= buy;
+    document
+      .getElementById(`upgrade_${id}`)
+      .setAttribute("onclick", `AddTouch(${value}, ${buy / additive}, ${id})`);
+    document.getElementById(
+      `cost_upgrade_${id}`
+    ).innerText = `Costs: ${FormatValue(buy / additive)}`;
   }
 }
