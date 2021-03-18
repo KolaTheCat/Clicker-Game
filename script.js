@@ -7,6 +7,23 @@ let item = document.getElementById("item");
 var touchValue = 1;
 var multValue = 0;
 var moneyValue = 0;
+var multcont = {
+  0: 0,
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+};
+var touchcont = {
+  0: 0,
+  1: 0,
+  2: 0,
+  3: 0,
+  4: 0,
+  5: 0,
+};
+var received = false;
 
 const additive = 0.25;
 
@@ -23,7 +40,20 @@ setInterval(() => {
 }, 1000);
 
 setInterval(() => {
-  for (let i = 0; i <= 9; i++) {
+  let moneyRegex = parseInt(
+    money.innerText
+      .split(/[A-z\:]/)
+      .join("")
+      .split(/[R\$]/)
+      .join("")
+      .split(/[.][0-9]+$/)
+      .join("")
+      .split(/\,/)
+      .join("")
+      .trim()
+  );
+
+  for (let i = 0; i <= 5; i++) {
     let cost_helper = parseInt(
       document
         .getElementById(`cost_helper_${i}`)
@@ -50,20 +80,18 @@ setInterval(() => {
         .join("")
         .trim()
     );
-    let moneyRegex = parseInt(
-      money.innerText
-        .split(/[A-z\:]/)
-        .join("")
-        .split(/[R\$]/)
-        .join("")
-        .split(/[.][0-9]+$/)
-        .join("")
-        .split(/\,/)
-        .join("")
-        .trim()
-    );
-
-    console.log([cost_helper, cost_upgrade, moneyRegex]);
+    // let moneyRegex = parseInt(
+    //   money.innerText
+    //     .split(/[A-z\:]/)
+    //     .join("")
+    //     .split(/[R\$]/)
+    //     .join("")
+    //     .split(/[.][0-9]+$/)
+    //     .join("")
+    //     .split(/\,/)
+    //     .join("")
+    //     .trim()
+    // );
 
     if (moneyRegex < cost_helper) {
       document.getElementById(`helper_${i}`).setAttribute("disabled", true);
@@ -76,6 +104,12 @@ setInterval(() => {
       document.getElementById(`upgrade_${i}`).removeAttribute("disabled");
     }
   }
+
+  if (moneyRegex >= 50 && !received) {
+    touchValue = 2;
+    received = true;
+    alert("First Achieviment: Reach $50");
+  }
 }, 1);
 
 function FormatValue(string) {
@@ -86,6 +120,7 @@ function AddMulti(value, buy, id) {
   if (moneyValue >= buy) {
     multValue += value;
     moneyValue -= buy;
+    multcont[id] += 1;
     document
       .getElementById(`helper_${id}`)
       .setAttribute("onclick", `AddMulti(${value}, ${buy / additive}, ${id})`);
@@ -97,8 +132,9 @@ function AddMulti(value, buy, id) {
 
 function AddTouch(value, buy, id) {
   if (moneyValue >= buy) {
-    touchValue += value;
+    multValue += value * multcont[id];
     moneyValue -= buy;
+    touchcont[id] += 1;
     document
       .getElementById(`upgrade_${id}`)
       .setAttribute("onclick", `AddTouch(${value}, ${buy / additive}, ${id})`);
