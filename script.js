@@ -24,27 +24,59 @@ setInterval(() => {
 
 setInterval(() => {
   for (let i = 0; i <= 9; i++) {
-    let cost_helper = document
-      .getElementById(`cost_helper_${i}`)
-      .innerText.split(/\D/g)
-      .join("");
-    let cost_upgrade = document
-      .getElementById(`cost_upgrade_${i}`)
-      .innerText.split(/\D/g)
-      .join("");
-    let moneyRegex = money.innerText.split(/\D/g).join("");
+    let cost_helper = parseInt(
+      document
+        .getElementById(`cost_helper_${i}`)
+        .innerText.split(/[A-z\:]/)
+        .join("")
+        .split(/[R\$]/)
+        .join("")
+        .split(/[.][0-9]+$/)
+        .join("")
+        .split(/\,/)
+        .join("")
+        .trim()
+    );
+    let cost_upgrade = parseInt(
+      document
+        .getElementById(`cost_upgrade_${i}`)
+        .innerText.split(/[A-z\:]/)
+        .join("")
+        .split(/[R\$]/)
+        .join("")
+        .split(/[.][0-9]+$/)
+        .join("")
+        .split(/\,/)
+        .join("")
+        .trim()
+    );
+    let moneyRegex = parseInt(
+      money.innerText
+        .split(/[A-z\:]/)
+        .join("")
+        .split(/[R\$]/)
+        .join("")
+        .split(/[.][0-9]+$/)
+        .join("")
+        .split(/\,/)
+        .join("")
+        .trim()
+    );
+
+    console.log([cost_helper, cost_upgrade, moneyRegex]);
+
     if (moneyRegex < cost_helper) {
       document.getElementById(`helper_${i}`).setAttribute("disabled", true);
-    } else if (moneyRegex >= cost_helper) {
+    } else {
       document.getElementById(`helper_${i}`).removeAttribute("disabled");
     }
     if (moneyRegex < cost_upgrade) {
       document.getElementById(`upgrade_${i}`).setAttribute("disabled", true);
-    } else if (moneyRegex >= cost_upgrade) {
+    } else {
       document.getElementById(`upgrade_${i}`).removeAttribute("disabled");
     }
   }
-}, 1000);
+}, 1);
 
 function FormatValue(string) {
   return string.toLocaleString("en-US", { style: "currency", currency: "USD" });
