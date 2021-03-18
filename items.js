@@ -1,91 +1,62 @@
-let helpers = document.getElementById("helpers");
-let upgrades = document.getElementById("upgrades");
-let multItems = [
-  {
-    name: "Multiplier 1",
-    value: 0.02,
-    buy: 20,
-  },
-  {
-    name: "Multiplier 2",
-    value: 2,
-    buy: 400,
-  },
-  {
-    name: "Multiplier 3",
-    value: 4,
-    buy: 1800,
-  },
-  {
-    name: "Multiplier 4",
-    value: 9,
-    buy: 50000,
-  },
-  {
-    name: "Under Development",
-    value: 0.61,
-    buy: 610,
-  },
-  {
-    name: "Under Development",
-    value: 1.25,
-    buy: 2500,
-  },
-];
-let touchItems = [
-  {
-    name: "Upgrade 1",
-    value: 0.07,
-    buy: 1000,
-  },
-  {
-    name: "Upgrade 2",
-    value: 5,
-    buy: 5000,
-  },
-  {
-    name: "Upgrade 3",
-    value: 13,
-    buy: 13000,
-  },
-  {
-    name: "Upgrade 4",
-    value: 29,
-    buy: 29000,
-  },
-  {
-    name: "Upgrade 5",
-    value: 61,
-    buy: 61000,
-  },
-  {
-    name: "Upgrade 6",
-    value: 125,
-    buy: 125000,
-  },
-];
+let helpersElement = document.getElementById("helpers");
+let upgradesElement = document.getElementById("upgrades");
 
-multItems.forEach(({ name, value, buy }, item) => {
+const multipliers = multipliersJSON.map(
+  ({ name, value, cost }, i) => new Item(name, value, cost, i)
+);
+
+const upgrades = upgradesJSON.map(
+  ({ name, value, cost }, i) => new Item(name, value, cost, i)
+);
+
+multipliers.forEach((multiplier) => {
   var li = document.createElement("li");
 
-  li.innerHTML = `
-        <button id="helper_${item}" onclick="AddMulti(${value}, ${buy}, ${item})">
-            <p>${name}</p>
-            <p id="cost_helper_${item}">Costs: ${FormatValue(buy)}</p>
-        </button>
-    `;
-  helpers.appendChild(li);
+  var btn = document.createElement("button");
+  btn.id = `helper_${multiplier.id}`;
+
+  var p1 = document.createElement("p");
+  p1.id = `helper_${multiplier.id}_name`;
+  p1.innerText = `${multiplier.name}`;
+
+  var p2 = document.createElement("p");
+  p2.id = `cost_helper_${multiplier.id}`;
+  p2.innerText = `Costs: ${FormatValue(multiplier.cost)}`;
+
+  btn.appendChild(p1);
+  btn.appendChild(p2);
+
+  btn.addEventListener("click", e => {
+    multiplier.Add()
+  })
+
+  li.appendChild(btn);
+
+  helpersElement.appendChild(li);
 });
 
-touchItems.forEach(({ name, value, buy }, item) => {
+upgrades.forEach((upgrade) => {
   var li = document.createElement("li");
 
-  li.innerHTML = `
-        <button id="upgrade_${item}" onclick="AddTouch(${value}, ${buy}, ${item})">
-            <p>${name}</p>
-            <p id="cost_upgrade_${item}">Costs: ${FormatValue(buy)}</p>
-        </button>
-    `;
+  var btn = document.createElement("button");
+  btn.id = `upgrade_${upgrade.id}`;
 
-  upgrades.appendChild(li);
+  var p1 = document.createElement("p");
+  p1.id = `upgrade_${upgrade.id}_name`;
+  p1.innerText = `${upgrade.name}`;
+
+  var p2 = document.createElement("p");
+  p2.id = `cost_upgrade_${upgrade.id}`;
+  p2.innerText = `Costs: ${FormatValue(upgrade.cost)}`;
+
+  btn.appendChild(p1);
+  btn.appendChild(p2);
+
+  btn.addEventListener("click", e => {
+    upgrade.Add()
+  })
+
+  li.appendChild(btn);
+
+  upgradesElement.appendChild(li);
 });

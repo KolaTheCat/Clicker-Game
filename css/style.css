@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+
+* {
+  cursor: url("../src/cursor-removebg-preview.png"), auto;
+  font-family: "Indie Flower", cursive;
+  margin: 0;
+  padding: 0;
+}
+
+.money {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.money h3 {
+  font-size: 25px;
+}
+
+/* .touch {
+  display: none;
+} */
+
+.multi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.multi #multi {
+  margin-left: 10px;
+}
+
+.feedback {
+  align-items: center;
+  color: red;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  text-decoration: none;
+  transition: text-decoration 0.5s;
+}
+
+.feedback:hover {
+  text-decoration: underline;
+}
+
+#btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+
+  padding: 25px;
+  font-size: 25px;
+}
+
+#helpers {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-between;
+  margin: 10px 50px;
+}
+
+#helpers li button {
+  min-height: 125px;
+  min-width: 125px;
+}
+
+#upgrades {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-between;
+  margin: 10px 50px;
+}
+
+#upgrades li button {
+  min-height: 125px;
+  min-width: 125px;
+}
+
+#achievements {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  justify-content: space-between;
+  margin: 10px 50px;
+}
+
+#upgrades li button {
+  min-height: 125px;
+  min-width: 125px;
+}
