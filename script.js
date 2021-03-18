@@ -23,9 +23,46 @@ var touchcont = {
   4: 0,
   5: 0,
 };
-var received = false;
 
 const additive = 0.25;
+const achieviment = [
+  {
+    Nome: "Achivement 1",
+    When: 100,
+    Received: false,
+    Upgrade: 1,
+  },
+  {
+    Nome: "Achivement 2",
+    When: 1000,
+    Received: false,
+    Upgrade: 10,
+  },
+  {
+    Nome: "Achivement 3",
+    When: 10000,
+    Received: false,
+    Upgrade: 100,
+  },
+  {
+    Nome: "Achivement 4",
+    When: 100000,
+    Received: false,
+    Upgrade: 1000,
+  },
+  {
+    Nome: "Achivement 5",
+    When: 1000000,
+    Received: false,
+    Upgrade: 10000,
+  },
+  {
+    Nome: "Achivement 6",
+    When: 10000000,
+    Received: false,
+    Upgrade: 100000,
+  },
+];
 
 btn.addEventListener("click", () => {
   moneyValue += touchValue;
@@ -105,10 +142,13 @@ setInterval(() => {
     }
   }
 
-  if (moneyRegex >= 50 && !received) {
-    touchValue = 2;
-    received = true;
-    alert("First Achieviment: Reach $50");
+  for (let a = 0; a <= 5; a++) {
+    if (achieviment[a].When <= moneyRegex && achieviment[a].Received == false) {
+      touchValue += achieviment[a].Upgrade;
+      achieviment[a].Received = true;
+      alert(`${achieviment[a].Nome}: You reach ${achieviment[a].When}`);
+      alert(`Your touch was upgraded to ${achieviment[a].Upgrade}`);
+    }
   }
 }, 1);
 
@@ -143,3 +183,20 @@ function AddTouch(value, buy, id) {
     ).innerText = `Costs: ${FormatValue(buy / additive)}`;
   }
 }
+
+let achievements = document.getElementById("achievements");
+achieviment.forEach((item) => {
+  let li = document.createElement("li");
+  let rec = item.Received ? "Received" : "Not Received";
+
+  li.innerHTML = `
+    <button>
+      <p>${item.Nome}</p>
+      <p>You receive when reach $${item.When}</p>
+      <p>You get ${item.Upgrade} of touch points</p>
+      <p>Status: ${rec}</p>
+    </button>
+  `;
+
+  achievements.appendChild(li);
+});
