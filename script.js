@@ -1,9 +1,11 @@
+// DOM contents
 let money = document.getElementById("money");
 let touch = document.getElementById("touch");
 let mult = document.getElementById("multi");
 let btn = document.getElementById("btn");
 let item = document.getElementById("item");
 
+// Mutable values
 var touchValue = 1;
 var multValue = 0;
 var moneyValue = 0;
@@ -24,8 +26,9 @@ var touchcont = {
   5: 0,
 };
 
+// Imutable values
 const additive = 0.25;
-const achieviment = [
+var achieviment = [
   {
     Nome: "Achivement 1",
     When: 100,
@@ -64,11 +67,13 @@ const achieviment = [
   },
 ];
 
+// Button to Win Money
 btn.addEventListener("click", () => {
   moneyValue += touchValue;
   money.innerText = FormatValue(moneyValue);
 });
 
+// Infos Updater
 setInterval(() => {
   moneyValue += multValue;
   money.innerText = FormatValue(moneyValue);
@@ -76,6 +81,7 @@ setInterval(() => {
   touch.innerText = touchValue;
 }, 1000);
 
+// Checks if the (upgrade|helper|acheiviment) are available or not
 setInterval(() => {
   let moneyRegex = parseInt(
     money.innerText
@@ -149,13 +155,20 @@ setInterval(() => {
       alert(`${achieviment[a].Nome}: You reach ${achieviment[a].When}`);
       alert(`Your touch was upgraded to ${achieviment[a].Upgrade}`);
     }
+
+    if (achieviment[a].Received == true) {
+      document.getElementById(`achievement_${a}`).innerText =
+        "Status: Received";
+    }
   }
 }, 1);
 
+// Format the values to a currency
 function FormatValue(string) {
   return string.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
 
+// Apply the helpers upgrade
 function AddMulti(value, buy, id) {
   if (moneyValue >= buy) {
     multValue += value;
@@ -170,6 +183,7 @@ function AddMulti(value, buy, id) {
   }
 }
 
+// Apply upgrade to the helpers
 function AddTouch(value, buy, id) {
   if (moneyValue >= buy) {
     multValue += value * multcont[id];
@@ -184,17 +198,17 @@ function AddTouch(value, buy, id) {
   }
 }
 
+// Create a list of achievements
 let achievements = document.getElementById("achievements");
-achieviment.forEach((item) => {
+achieviment.forEach(({ Nome, When, Upgrade, Received }, item) => {
   let li = document.createElement("li");
-  let rec = item.Received ? "Received" : "Not Received";
-
+  let rec = Received == true ? "Received" : "Not Received";
   li.innerHTML = `
     <button>
-      <p>${item.Nome}</p>
-      <p>You receive when reach $${item.When}</p>
-      <p>You get ${item.Upgrade} of touch points</p>
-      <p>Status: ${rec}</p>
+      <p>${Nome}</p>
+      <p>You receive when reach $${When}</p>
+      <p>You get ${Upgrade} of touch points</p>
+      <p id="achievement_${item}">Status: ${rec}</p>
     </button>
   `;
 
